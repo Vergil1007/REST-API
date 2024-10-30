@@ -1,0 +1,238 @@
+openapi: 3.0.0
+info:
+  title: Country and City API
+  version: "1.0.0"
+  description: API for managing countries and cities
+servers:
+  - url: http://localhost:3000
+    description: Local server
+
+tags:
+  - name: Countries
+    description: Operations with countries
+  - name: Cities
+    description: Operations with cities
+
+paths:
+  /countries:
+    get:
+      tags:
+        - Countries
+      summary: Get a list of all countries
+      responses:
+        "200":
+          description: List of all countries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Country"
+    post:
+      tags:
+        - Countries
+      summary: Add a new country
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Country"
+      responses:
+        "201":
+          description: Country created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Country"
+
+  /countries/{id}:
+    get:
+      tags:
+        - Countries
+      summary: Get a country by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Country ID
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Country information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Country"
+        "404":
+          description: Country not found
+
+    put:
+      tags:
+        - Countries
+      summary: Update an existing country
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Country ID
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Country"
+      responses:
+        "200":
+          description: Country updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Country"
+        "404":
+          description: Country not found
+
+    delete:
+      tags:
+        - Countries
+      summary: Delete a country
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Country ID
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Country deleted
+        "404":
+          description: Country not found
+
+  /cities:
+    get:
+      tags:
+        - Cities
+      summary: Get a list of all cities
+      responses:
+        "200":
+          description: List of all cities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/City"
+    post:
+      tags:
+        - Cities
+      summary: Add a new city
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/City"
+      responses:
+        "201":
+          description: City created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/City"
+
+  /cities/{id}:
+    get:
+      tags:
+        - Cities
+      summary: Get a city by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: City ID
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: City information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/City"
+        "404":
+          description: City not found
+
+    put:
+      tags:
+        - Cities
+      summary: Update an existing city
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: City ID
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/City"
+      responses:
+        "200":
+          description: City updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/City"
+        "404":
+          description: City not found
+
+    delete:
+      tags:
+        - Cities
+      summary: Delete a city
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: City ID
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: City deleted
+        "404":
+          description: City not found
+
+components:
+  schemas:
+    Country:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Argentina"
+        continent:
+          type: string
+          example: "South America"
+        population:
+          type: integer
+          example: 45195777
+    City:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Buenos Aires"
+        population:
+          type: integer
+          example: 3013000
+        countryName:
+          type: integer
+          example: Argentina
